@@ -282,10 +282,48 @@ bob.Work(10)
 # __str__ , __add__, __sub__ 써보기
 class Point2D:
     def __init__(self, x, y):
-        
+        self.x = x
+        self.y = y
+    def __add__(self, pt):
+        new_x = self.x + pt.x
+        new_y = self.y + pt.y
+        return Point2D(new_x, new_y)
+    def __sub__(self, pt):
+        new_x = self.x - pt.x
+        new_y = self.y - pt.y
+        return Point2D(new_x, new_y)
+    def __str__(self):
+        return '({}, {})'.format(self.x, self.y)
+p1 = Point2D(3,5)
+p2 = Point2D(1, -1)
 
+p3 = p1 + p2
+p4 = p1 - p2
 
+print(p1) -> (3,5)
+print(p2) -> (1,-1)
+print(p3) -> (4,4)
+print(p4) -> (2,6)
 
+class ComplexNumber:
+    def __init__(self, real, img):
+        self.real = real
+        self.img = img
+    def __str__(self):
+        if self.img>=0:
+            return '{} + j{}'.format(self.real, self.img)
+        else:
+            return '{} - j{}'.format(self.real, abs(self.img))
 
+    def __add__(self, cn):
+        return ComplexNumber(self.real+cn.real, self.img+cn.img)
+    
+    def __sub__(self, cn):
+        return ComplexNumber(self.real-cn.real, self.img-cn.img)
 
+a =  ComplexNumber(1, 2)
+b = ComplexNumber(-3, 3)
+c = a + b
+d = a - b
+print(a, b, c, d, sep=',  ') -> 1+j2, -3+j3, -2+j5, 4-j1
 
